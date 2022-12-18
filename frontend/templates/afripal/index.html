@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- unicons link -->
+    {%load static%}
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="{%static 'styles/index.css' %}">
+    <link rel="stylesheet" href="{%static 'styles/swiper-bundle.min.css' %} ">
+    <title>Afripal home page</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="{%url 'index'%}">Afri<span>pal</span></a>
+            </div>
+            <div class="navigation">
+                <div class="navigation-items">
+                    <i class="uil uil-times nav-close-btn"></i>
+                    <a href="{%url 'index'%}"><i class="uil uil-home"></i>Home</a>
+                    <!-- <a href="about.html"> <i class="uil uil-info-circle"></i>About</a> -->
+
+                    <a href="contacts.html"> <i class="uil uil-envelope"></i>Contact us</a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+            <i class="uil uil-apps nav-menu-btn"></i>
+        </div>
+    </header>
+    <section class="home">
+        <div class="media-icons">
+            <a href="#"><i class="uil uil-facebook-f"></i></a>
+            <a href="#"><i class="uil uil-twitter"></i></a>
+            <a href="#"><i class="uil uil-instagram-alt"></i></a>
+        </div>
+        <div class="swiper bg-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{% static 'images/bgIMG.png' %}" alt="beachimage">
+                    <div class="text-content">
+                        <h4>Team of professionals</h4>
+                        <h2 class="title"><span>Get</span> your Task Done!</h2>
+                        <p>We are a team of professionals who work diligently to ensure quality work to our esteemed customers. On a single call you get your task done with us. We take your burden away by solving those big tasks for you. Join as now to and
+                            enjoy our services!</p>
+                        <a href="{%url 'register' %}"><button class="read-btn"> Create Account<i class="uil uil-arrow-right"></i></button></a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/bgIMG.png' %}" alt="beachimage">
+                    <div class="text-content">
+                        <h4>All you need in one click</h4>
+                        <h2 class="title">ENJOY OUR SERVICES</h2>
+                        <p>Are you worried about how you'll get your work done despite the difficult field? Not to worry anymore for we are here for you. All the tasks including technical, science, biology and many other fields are all covered by our team
+                            of professionals. </p>
+                        <a href="contacts.html"><button class="read-btn">Contact us<i class="uil uil-arrow-right"></i></button></a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="bg-slider-thumbs">
+            <div class="swiper-wrapper thumbs-container">
+                <div class="swiper-slide img"></div>
+                <div class="swiper-slide img"></div>
+                <!-- <img src="images/bgIMG.png" class="swiper-slide" alt="">
+                <img src="images/bgIMG.png" class="swiper-slide" alt=""> -->
+
+            </div>
+        </div>
+    </section>
+    <section class="services">
+        <div class="title">
+            <h2>Get your work done <span>with us!</span></h2>
+        </div>
+        <div class="service-container">
+            <div class="container">
+                <div class="icon-container">
+                    <i class="uil uil-adjust-circle"></i>
+                </div>
+                <h3>All Categories</h3>
+                <p>inclusive</p>
+            </div>
+            <div class="container">
+                <div class="icon-container">
+                    <i class="uil uil-usd-circle"></i>
+                </div>
+                <h3>Affordable prices</h3>
+                <p>save</p>
+            </div>
+            <div class="container">
+                <div class="icon-container">
+                    <i class="uil uil-check"></i>
+                </div>
+                <h3>Quality Work</h3>
+                <p>Quintessential</p>
+            </div>
+            <div class="container">
+                <div class="icon-container">
+                    <i class="uil uil-clock"></i>
+                </div>
+                <h3>Less Time</h3>
+                <p>reliable</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="footer">
+
+        <div class="copyright">
+            <p> <i class="uil uil-copyright"></i>Copyright 2022, <a href="{%url 'index' %}">Afri<span>pal</span></a></p>
+        </div>
+        <div class="footer-links">
+            <a href="{%url 'index' %}">Home</a>
+            <a href="#">Terms of service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="{% url 'register' %}">Sign Up</a>
+        </div>
+
+    </section>
+    <script src="{% static 'scripts/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="{% static 'styles/admin.css' %}">
+    <title>Afripal Admin Page</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="{%url 'index'%}">Afri<span>pal</span></a>
+            </div>
+            <div class="account">
+                <div class="account-details">
+                    <p id="admin-name">{{request.user.username}} <a href="{%url 'logout'%}" id="logout"><i class="uil uil-angle-down"></i></a></p>
+                    <div class="logout-div">
+                        <a href="{%url 'index'%}">Logout</a>
+                        <i class="uil uil-times hide-btn"></i>
+                    </div>
+                    <span>Admin</span>
+                </div>
+                <img src="{{request.user.profile_pic.url}}" alt="" class="profile">
+            </div>
+
+        </div>
+    </header>
+    <section class="main">
+        <div class="main-container">
+            <div class="dashboard-title">
+                <h2>Dashboard</h2>
+                <p id="dateDisplay"></p>
+            </div>
+            <!-- Container for pending jobs begin here.. -->
+            <div class="pending-jobs" id="pending">
+                <h2>Pending Jobs</h2>
+                <!-- <div class="jobs-container">
+                    <h3 id="category">Web Development</h3>
+                    <p id="job-desc">
+                        Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="client-desc">
+                        <p>Due Date: <span id="due-date">09-12-2022</span> </p>
+                        <p>State: <span id="state">In Progress</span> </p>
+                        <p>Client Name: <span id="name">Geek Coders</span> </p>
+                        <a href="#" class="view-div">View More</a>
+                    </div>
+                </div>
+                <div class="jobs-container">
+                    <h3 id="category">Chemistry Assignment</h3>
+                    <p id="job-desc">
+                        Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="client-desc">
+                        <p>Due Date: <span id="due-date">09-12-2022</span> </p>
+                        <p>State: <span id="state">Pending</span> </p>
+                        <p>Client Name: <span id="name">Geek Coders</span> </p>
+                        <a href="#" class="view-div">View More</a>
+                    </div>
+                </div>
+                <div class="jobs-container">
+                    <h3 id="category">Chemistry Assignment</h3>
+                    <p id="job-desc">
+                        Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="client-desc">
+                        <p>Due Date: <span id="due-date">09-12-2022</span> </p>
+                        <p>State: <span id="state">In Progress</span> </p>
+                        <p>Client Name: <span id="name">Geek Coders</span> </p>
+                        <a href="#" class="view-div">View More</a>
+                    </div>
+                </div> -->
+                <!-- Floating div for pending jobs begin here -->
+
+            </div>
+            <div class="recent-jobs-container">
+                <h2>Recent Jobs</h2>
+                <!-- Table for recent jobs begin here... -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="name-title">Client Name</th>
+                            <th id="category-title">Job Category</th>
+                            <th id="payment-title">Payment</th>
+                            <th id="status-title">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="previous">
+
+
+                        <!-- <tr>
+                            <td id="name">Ben Carson</td>
+                            <td id="category">Web Design</td>
+                            <td id="paymebt">Paid</td>
+                            <td id="status">Completed</td>
+                            <td><a href="#">details</a></td>
+                        </tr>
+                        <tr>
+                            <td id="name">New Client</td>
+                            <td id="category">Physics</td>
+                            <td id="paymebt">Not Paid</td>
+                            <td id="status">In Progress</td>
+                            <td><a href="#">details</a></td>
+                        </tr>
+                        <tr>
+                            <td id="name">John Doe</td>
+                            <td id="category">Civil Technicals</td>
+                            <td id="payment">Paid</td>
+                            <td id="status">Completed</td>
+                            <td><a href="#">details</a></td>
+                        </tr> -->
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="activity-container">
+            <!-- New Jobs Container begins here...== -->
+            <h2>New Jobs</h2>
+            <div class="new-jobs" id="new-jobs">
+
+                <!-- <div class="jobs-container">
+                    <h3 id="category">Web Development</h3>
+                    <p id="job-desc">
+                        Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="client-desc">
+                        <p id="time">2 minutes ago</p>
+                        <span id="view" class="view-details">View Details</span>
+                    </div>
+                </div>
+                <div class="jobs-container">
+                    <h3 id="category">Web Development</h3>
+                    <p id="job-desc">
+                        Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="client-desc">
+                        <p id="time">1 hour ago</p>
+                        <span id="view" class="view-details">View Details</span>
+                    </div>
+                </div>
+                <div class="jobs-container">
+                    <h3 id="category">Web Development</h3>
+                    <p id="job-desc">
+                        Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="client-desc">
+                        <p id="time">2 minutes ago</p>
+                        <span id="view" class="view-details">View Details</span>
+                    </div>
+                </div> -->
+
+            </div>
+
+
+
+            <div class="earnings">
+                <span><i class="uil uil-chart-line"></i></span>
+                <h2>Total Earnings</h2>
+                <p id="amount">$1475</p>
+            </div>
+            <div class="earnings">
+                <span><i class="uil uil-usd-circle"></i></span>
+                <h2>Pending Amount</h2>
+                <p id="pending-amount">$215</p>
+            </div>
+
+        </div>
+        </div>
+
+
+        <!-- Div for floating pending jobs -->
+        <div class="floating-pending-container">
+            <div class="pending-jobs-container">
+                <i class="uil uil-times hide-div-btn"></i>
+
+                <div class="container">
+                    <p>Client Name: </p>
+                    <p id="name">Ben Carson</p>
+                </div>
+                <div class="container">
+                    <p>Job Title:</p>
+                    <h3>Job Title here.</h3>
+                </div>
+                <div class="desc-container">
+                    <p>Job Description:</p>
+
+                    <p id="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci tenetur, sed et non, omnis tempore quia veniam ducimus velit vero soluta quisquam eveniet debitis, asperiores laudantium dicta sequi corporis quidem. Description replaces
+                        this text</p>
+                </div>
+
+
+                <div class="container">
+                    <p>Posted: </p>
+                    <p id="time-posted">3 hours ago</p>
+                </div>
+                <div class="container">
+                    <p>Due Date: </p>
+                    <p id="due-date">19/12/2022</p>
+                </div>
+                <div class="container">
+                    <p>Budget: </p>
+                    <p id="budget">$213</p>
+                </div>
+                <div class="buttons-container">
+                    <button id="accept-btn">Mark Done</button>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- Floating div for new Jobs begin here.. -->
+
+        <div class="floating-container">
+            <div class="jobs-container">
+                <i class="uil uil-times hide--div-btn"></i>
+                <div class="container">
+                    <p>Client Name: </p>
+                    <p id="name">Ben Carson</p>
+                </div>
+                <div class="container">
+                    <p>Job Title:</p>
+                    <h3>Job Title here.</h3>
+                </div>
+                <div class="desc-container">
+                    <p>Job Description:</p>
+
+                    <p id="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci tenetur, sed et non, omnis tempore quia veniam ducimus velit vero soluta quisquam eveniet debitis, asperiores laudantium dicta sequi corporis quidem. Description replaces
+                        this text</p>
+                </div>
+
+
+                <div class="container">
+                    <p>Posted: </p>
+                    <p id="time-posted">3 hours ago</p>
+                </div>
+                <div class="container">
+                    <p>Due Date: </p>
+                    <p id="due-date">19/12/2022</p>
+                </div>
+                <div class="container">
+                    <p>Budget: </p>
+                    <p id="budget">$213</p>
+                </div>
+                <div class="buttons-container">
+                    <button id="accept-btn">Accept</button>
+                    <button id="decline-btn">Decline</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+
+        <div class="copyright">
+            <p> <i class="uil uil-copyright"></i>Copyright 2022, <a href="{%url 'index'%}">Afri<span>pal</span></a></p>
+        </div>
+        <div class="footer-links">
+            <a href="{%url 'index'%}">Home</a>
+            <a href="#">Terms of service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="signup.html">Logout</a>
+        </div>
+
+    </section>
+    <script>
+
+        var date = new Date();
+        var current_date = date.getDate() + " / " + (date.getMonth() + 1) + " / " + date.getFullYear();
+        document.getElementById("dateDisplay").innerHTML = current_date;
+
+
+
+
+        function buildNewJobs(){
+
+                var url = 'http://127.0.0.1:8000/Jobs/job-list'
+                var wrapper = document.getElementById('new-jobs')
+
+
+                fetch(url)
+                .then((resp) => resp.json())
+                .then(function(data){
+                //console.log('Data: ', data)
+
+                var jobs = data 
+                //console.log(jobs)
+                for(var i in jobs){
+                    var newJob = 
+                    `
+                    
+                    <div class="jobs-container">
+                        <h3 id="category">${jobs[i].title}</h3>
+                        <p id="job-desc">
+                            ${jobs[i].description}
+                        </p>
+                        <div class="client-desc">
+                            <p id="time">${jobs[i].day}</p>
+                            <a id="view" class="view-details" href="{%url 'detail-view'  %}">View Details</a>
+                        </div>
+                    </div>
+
+                    `
+
+                    wrapper.innerHTML += newJob 
+                }
+                })
+
+        }
+
+        buildNewJobs()
+
+
+
+
+
+
+
+
+    function buildPendingJobs(){
+
+        var url = 'http://127.0.0.1:8000/Jobs/pending-job-list'
+        var wrapper = document.getElementById('pending')
+
+
+        fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data){
+        //console.log('Data: ', data)
+
+        var jobs = data 
+        //console.log(jobs)
+        for(var i in jobs){
+            var newJob = 
+           `
+                        <div class="jobs-container">
+                            <h3 id="category">${jobs[i].title}</h3>
+                            <p id="job-desc">
+                                ${jobs[i].description}
+                            </p>
+                            <div class="client-desc">
+                                <p>Due Date:<span id="due-date"> ${jobs[i].due_date}</span> </p>
+                                <p>State: <span id="state">${jobs[i].state}</span> </p>
+                                <p>Client Name: <span id="name">${jobs[i].name}</span> </p>
+                                <a href="{%url 'detail-view'%}" class="view-div">View More</a>
+                            </div>
+                        </div>
+            `
+
+            wrapper.innerHTML += newJob 
+        }
+        })
+    }
+       
+        buildPendingJobs()
+
+
+
+
+
+
+        function buildPreviousJobs(){
+
+                var url = 'http://127.0.0.1:8000/Jobs/previous-jobs'
+                var wrapper = document.getElementById('previous')
+
+
+                fetch(url)
+                .then((resp) => resp.json())
+                .then(function(data){
+                console.log('Data: ', data)
+
+                var jobs = data 
+                console.log(jobs)
+                for(var i in jobs){
+                    var newJob = 
+
+                    `
+                        <tr>
+                            <td id="name">${jobs[i].name}</td>
+                            <td id="category">${jobs[i].title}</td>
+                            <td id="paymebt">${jobs[i].payment}</td>
+                            <td id="status">${jobs[i].state}</td>
+                            <td><a href="{%url 'detail-view'%}">details</a></td>
+                        </tr>         
+                    `
+
+                    wrapper.innerHTML += newJob 
+                }
+            })
+        }
+
+
+        buildPreviousJobs()
+
+
+
+
+
+        //we need a function to help us return a detailed view of our jobs page 
+        // alternatively we could use Carson's script which is way easier
+
+
+       
+
+    </script>
+    <script src="{% static 'scripts/admin.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="{% static 'styles/admin.css' %} ">
+    <title>Afripal Admin Page</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="{%url 'index' %}">Afri<span>pal</span></a>
+            </div>
+            <div class="account">
+                <div class="account-details">
+                    <p id="admin-name">{{request.user.username}} <a href="#" id="logout"><i class="uil uil-angle-down"></i></a></p>
+                    <div class="logout-div">
+                        <a href="{%url 'logout' %}">Logout</a>
+                        <i class="uil uil-times hide-btn"></i>
+                    </div>
+                    <span>Admin</span>
+                </div>
+                <img src="{{request.user.profile_pic.url}}" alt="" class="profile">
+            </div>
+
+        </div>
+    </header>
+    <section class="main">
+        <div class="main-container">
+            <div class="dashboard-title">
+                <h2>Dashboard</h2>
+                <p id="dateDisplay"></p>
+            </div>
+            <!-- Container for pending jobs begin here.. -->
+            <div class="pending-jobs">
+                <h2>Pending Jobs</h2>
+
+
+
+                {%for job in pending_jobs%}
+                <div class="jobs-container">
+                    <h3 id="category">{{job.title}}</h3>
+                    <p id="job-desc">{{job.description}}</p>
+                    <div class="client-desc">
+                        <p>Due Date: <span id="due-date">{{job.due_date}}</span> </p>
+                        <p>State: <span id="state">{{job.state}}</span> </p>
+                        <p>Client Name: <span id="name">{{job.name}}</span> </p>
+                        <a href="{%url 'detail-view' job.id%}" class="view-div">View More</a>
+                    </div>
+                </div>
+                {%endfor%}
+
+
+
+
+        
+                <!-- Floating div for pending jobs begin here -->
+
+            </div>
+            <div class="recent-jobs-container">
+                <h2>Recent Jobs</h2>
+                <!-- Table for recent jobs begin here... -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="name-title">Client Name</th>
+                            <th id="category-title">Job Category</th>
+                            <th id="payment-title">Payment</th>
+                            <th id="status-title">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for job in prev_jobs%}
+                        <tr>
+                            <td id="name">{{job.name}}</td>
+                            <td id="category">{{job.title}}</td>
+                            <td id="payment">{{job.payment}}</td>
+                            <td id="status">{{job.state}}</td>
+                            <td><a href="{%url 'detail-view' job.id%}">details</a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="activity-container">
+            <!-- New Jobs Container begins here...== -->
+            <h2>New Jobs</h2>
+            <div class="new-jobs">
+
+
+
+                {%for job in new_jobs%}
+                <div class="jobs-container">
+                    <h3 id="category">{{job.title}}</h3>
+                    <p id="job-desc">{{job.description}}</p>
+                    <div class="client-desc">
+                        <p id="time">{{job.timestamp}}</p>
+                        <a id="view" class="view-details" href="{%url 'detail-view' job.id%}">View Details</a>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+
+
+
+
+            <div class="earnings">
+                <span><i class="uil uil-chart-line"></i></span>
+                <h2>Total Earnings</h2>
+                <p id="amount">${{total}}</p>
+            </div>
+            <div class="earnings">
+                <span><i class="uil uil-usd-circle"></i></span>
+                <h2>Pending Amount</h2>
+                <p id="pending-amount">${{total_pend}}</p>
+            </div>
+
+        </div>
+        </div>
+
+
+        <!-- Div for floating pending jobs -->
+        
+        </div>
+        <!-- Floating div for new Jobs begin here.. -->
+    </section>
+
+
+
+
+
+    <section class="footer">
+
+        <div class="copyright">
+            <p> <i class="uil uil-copyright"></i>Copyright 2022, <a href="{%url 'index' %}">Afri<span>pal</span></a></p>
+        </div>
+        <div class="footer-links">
+            <a href="{%url 'index' %}">Home</a>
+            <a href="#">Terms of service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="{%url 'login'%}">Logout</a>
+        </div>
+
+    </section>
+    <script>
+        var date = new Date();
+        var current_date = date.getDate() + " / " + (date.getMonth() + 1) + " / " + date.getFullYear();
+        document.getElementById("dateDisplay").innerHTML = current_date;
+    </script>
+    <script src="{% static 'scripts/admin.js' %}"></script>
+</body>
+
+</html>

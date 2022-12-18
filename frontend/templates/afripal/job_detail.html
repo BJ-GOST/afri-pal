@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afripal</title>
+
+    <style type="text/css">
+        *{
+            margin: 7px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrapper{
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+        }
+                
+        .container{
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: safe start;
+        }
+
+        .mark-btn{
+            height: 7vh;
+            width: 10%;
+            color: white;
+            background: rgb(33, 33, 199);
+            border-radius: 5px;
+        }
+
+        @media screen and (max-width: 600px){
+            .mark-btn{
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <div class="container">
+            <h3 class="title">Title: {{job.title}}</h3>
+            <p class="desc">Description: {{job.description}}</p>
+            <!-- possible file field -->
+            <p class="time">Due date: {{job.due_date}}</p>
+            <p class="budget">Budget: {{job.budget}}</p>
+            <p class="name">Client: {{job.name}}</p>
+
+            {%if job.state == 'pending'%}
+            <form action="{%url 'mark' %}" method="post">
+                {%csrf_token%}
+                <input type="hidden" name="job_id" value="{{job.id}}">
+                <button class="mark-btn" type="submit">Mark as done</button>
+            </form>
+            {%else%}
+            <span><b>Completed!</b></span>
+            {%endif%}
+        </div>
+
+    </div>
+
+</body>
+</html>

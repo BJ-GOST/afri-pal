@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <title>Sign up page</title>
+</head>
+<div class="container">
+    <form method="post" class="sign-up-form">
+        {%csrf_token%}
+        <!-- <div class="sign-google">
+            <i class="fa fa-google"></i><a href="#">  Sign in with Google</a>
+        </div>
+        <div class="hr-line">
+            <hr/>
+            <p>or</p>
+            <hr/>
+        </div> -->
+        <!-- <div class="input-field">
+            <i class="fa fa-user"></i>
+            <input type="text" placeholder="Name" />
+        </div> -->
+        <div class="input-field">
+            <i class="fa fa-envelope"></i>
+            <input type="text" placeholder="Email"  name="username"/>
+        </div>
+        <div class="input-field">
+            <i class="fa fa-lock"></i>
+            <input type="password" placeholder="Password"  name="password"/>
+        </div>
+        <!-- <div class="input-field">
+            <i class="fa fa-lock"></i>
+            <input type="password" placeholder="Confirm Password" />
+        </div> -->
+        <!-- <div class="input-check">
+            <input type="checkbox" />
+            <p>I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></p>
+        </div> -->
+        <input type="submit" value="Sign In" class="signup-btn">
+        <!-- <div class="paragraph">
+            <p>Lorem ipsum dolor sit amet consectetur <br/> adipisicing elit. Hic, nulla? Enim expedita, ipsam nostru</p>
+        </div>
+
+        <hr/> -->
+        <p>Don't have an account? <a href="{%url 'register'%}">Sign up here</a></p>
+    </form>
+</div>
+<div class="logo">
+    <a href="{%url 'register' %}">Afri<span>pal</span></a>
+</div>
+<!-- ==footer begins here..=== -->
+<div class="footer">
+    <div class="copyright">
+        <p> <i class="fa fa-copyright"></i>Copyright 2022, <a href="{%url 'index'%}">Afri<span>pal</span></a></p>
+    </div>
+    <div class="footer-links">
+        <a href="{%url 'index'%}">Home</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="{%url 'register' %}">Sign Up</a>
+    </div>
+</div>
+<div class="logo">
+    <a href="{%url 'index'%}">Afri<span>pal</span></a>
+</div>
+
+
+<body>
+
+</body>
+
+</html>

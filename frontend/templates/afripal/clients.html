@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="{% static 'styles/clients.css' %}">
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>clients page/create & view Job page</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="{%url 'index' %}">Afri<span>pal</span></a>
+            </div>
+            <div class="account">
+                <div class="account-details">
+                    <p id="admin-name"> {{request.user.username}} <a href="{%url 'logout'%}" id="logout"><i class="uil uil-angle-down"></i></a></p>
+                    <div class="logout-div">
+                        <a href="{%url 'logout' %}">Logout</a>
+                        <i class="uil uil-times hide-btn"></i>
+                    </div>
+                    <span>Client</span>
+                </div>
+                <img src="{{request.user.profile_pic.url}}" alt="" class="profile">
+            </div>
+
+        </div>
+    </header>
+    <section class="main-container">
+
+        <div class="jobs-container">
+            <div class="jobs-title">
+                <h2>My Jobs</h2>
+            </div>
+
+            <div class="job-details" id="job-wrapper">
+                <!-- <div class="jobs">
+                    <h4>Web Development</h4>
+                    <p class="desc">Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="date-container">
+                        <p><span>Date Posted:</span> 09-12-2022</p>
+                        <p><span>State:</span> Pending</p>
+                        <p><span>Uploaded file:</span> File name..</p>
+                        <a href="#" class="payment-btn">Make Pay</a>
+                    </div>
+                </div>
+                <div class="jobs">
+                    <h4>Physics Assignment</h4>
+                    <p class="desc">Hello Afripal, I need a web design and development service. The task is to create a website to my business and market my services through the website. More details are attached to the document here. Reach out to me for any questions.
+                    </p>
+                    <div class="date-container">
+                        <p><span>Date Posted:</span> 09-12-2022</p>
+                        <p><span>State:</span> completed</p>
+                        <p><span>Uploaded file:</span> File name..</p>
+                        <a href="#" class="payment-btn">Make Pay</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="create-job-container">
+            <div class="search-container">
+                <input type="text" name="Search work" id="search" placeholder="Enter Category">
+                <i class="uil uil-search"></i>
+            </div>
+            <form class="new-job" id="form-wrapper">
+                <h2>Create new Job</h2>
+                <div class="input-container">
+                    <fieldset>
+                        <legend>Job category</legend>
+                        <input type="text" name="Job type" id="job-title" placeholder="category">
+                    </fieldset>
+
+                </div>
+                <div class="input-container">
+                    <fieldset>
+                        <legend>Due Date</legend>
+                        <input type="date" name="Job type" id="due-date" >
+                    </fieldset>
+
+                </div>
+                <div class="input-container">
+                    <fieldset>
+                        <legend>Budget</legend>
+                        <input type="number" name="amount" id="job-budget" placeholder="amount in USD">
+                    </fieldset>
+
+                </div>
+                <div class="input-container">
+                    <fieldset>
+                        <legend>Job Description</legend>
+                        <textarea name="" id="job-desc" cols="10" rows="5"></textarea>
+                    </fieldset>
+
+                </div>
+                <div class="input-container file-container">
+                    <p>Upload file</p><input type="file" name="file" id="job-file">
+
+                </div>
+                <input type="hidden" name="user" value="{{request.user.id}}" id="job-user">
+                <input type="hidden" name="user" value="{{request.user.username}}" id="job-name">
+                <input type="submit" value="Save & Submit" class="button">
+            </form>
+        </div>
+
+    </section>
+
+    <section class="footer">
+
+        <div class="copyright">
+            <p> <i class="uil uil-copyright"></i>Copyright 2022, <a href="{%url 'index'%}">Afri<span>pal</span></a></p>
+        </div>
+        <div class="footer-links">
+            <a href="{%url 'index'%}">Home</a>
+            <a href="#">Terms of service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="{%url 'logout'%}">Logout</a>
+        </div>
+
+    </section>
+    <script src="{% static 'scripts/admin.js' %}"></script>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+
+
+
+    <script type="application/javascript">
+
+        //csrf_token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+
+
+
+
+        //shows the new jobs
+        function buildList()
+
+        {
+            
+            var url = 'http://127.0.0.1:8000/Jobs/my-jobs'
+            var wrapper = document.getElementById('job-wrapper')
+            wrapper.innerHTML = ''
+           
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data){
+                //console.log('Data: ', data)
+
+
+                var myJobs = data 
+                for (let i in myJobs){
+                    //console.log(i)
+                    let job = 
+                    `
+                        <div class="jobs">
+                            <h4>${myJobs[i].title}</h4>
+                            <p class="desc">${myJobs[i].description}</p>
+                            <div class="date-container">
+                                <p><span>Date Posted:</span>${myJobs[i].day}</p>
+                                <p><span>State:</span>${myJobs[i].state}</p>
+                                <p><span>Uploaded file:</span> File name..</p>
+                                <input type="hidden" id='pay-amount' name="amount" value="${myJobs[i].budget}">
+                                <input type="hidden" id='pay-name' name="name" value="${myJobs[i].title}">
+                                <input type="hidden" id='pay-id' name="name" value="${myJobs[i].id}">
+                                <button class="payment-btn" id="checkout-button" >Make Pay</button>
+                            </div>
+                        </div>
+                    `
+
+                wrapper.innerHTML += job
+
+                
+               
+                }
+
+
+
+        //this deals with payment
+        
+        var checkoutButton = document.getElementsByClassName('payment-btn');
+
+        for (let i = 0; i < checkoutButton.length; i++){
+
+           
+            var stripe = Stripe('pk_test_51MGEOPHnwFSv2IaUWM7OpT8cVnfuQP7W3oQLv7ge8bHHwEvn3G5Y2kGQF2MYOYAzgGfnOImmzbrQGM8OOJoal9io00TCMa7Ks0');
+            var payAmount = document.getElementById('pay-amount').value
+            var payName = document.getElementById('pay-name').value
+            var payId = document.getElementById('pay-id').value
+
+            checkoutButton[i].addEventListener('click', function() {
+
+            // Create a new Checkout Session using the server-side endpoint you
+            // created in step 3.
+            console.log(payAmount, payName)    
+
+            for (var i=0; i<payAmount.length; i++){
+                var pay= payAmount[i].value 
+                console.log(`this is the pay buddy ${payAmount}`)
+            }
+                
+            console.log(payName)
+            fetch(' http://127.0.0.1:8000/payment/create-checkout-session/', {
+            method: 'POST',
+            body: JSON.stringify({
+                        'name' : payName,
+                        'amount': payAmount,
+                        'Id': payId
+                    })
+            })
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function(result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, you should display the localized error message to your
+            // customer using `error.message`.
+            if (result.error) {
+                alert(result.error.message);
+            }
+            })
+            .catch(function(error) {
+            console.error('Error:', error);
+            });
+        });//end of payment
+
+        }
+
+
+
+
+            }
+
+        )
+        
+    }
+
+       buildList()
+        
+
+
+        //the form for creating jobs
+        var form = document.getElementById('form-wrapper')
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+
+            var url = 'http://127.0.0.1:8000/Jobs/create-job'
+            var title = document.getElementById('job-title').value
+            var description = document.getElementById('job-desc').value 
+            var due_date = document.getElementById('due-date').value 
+            var job_file = document.getElementById('job-file').value
+            var budget = document.getElementById('job-budget').value
+            var user = document.getElementById('job-user').value
+            var name = document.getElementById('job-name').value
+
+            // console.log(user)
+            // console.log(title)
+
+            fetch(url,
+
+                {
+                    method: 'POST',
+                    headers : {
+                        'Content-type':'application/json',
+                        'X-CSRFToken' : csrftoken,
+                    },
+                    body: JSON.stringify({
+                        'title': title,
+                        'description': description,
+                        'due_date': due_date,
+                        'job_file' : job_file,
+                        'budget' : budget,
+                        'customer' : user,
+                        'name' : name
+
+                    })
+                }
+            )
+
+            buildList()
+        })
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
