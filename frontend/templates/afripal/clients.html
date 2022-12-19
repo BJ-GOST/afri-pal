@@ -159,7 +159,7 @@
 
         {
             
-            var url = 'http://Bjgost.pythonanywhere.com/Jobs/my-jobs'
+            var url = 'http://bjgost.pythonanywhere.com/Jobs/my-jobs'
             var wrapper = document.getElementById('job-wrapper')
             wrapper.innerHTML = ''
            
@@ -221,7 +221,7 @@
             }
                 
             console.log(payName)
-            fetch(' http://Bjgost.pythonanywhere.com/payment/create-checkout-session/', {
+            fetch(' http://bjgost.pythonanywhere.com/payment/create-checkout-session/', {
             method: 'POST',
             body: JSON.stringify({
                         'name' : payName,
@@ -268,7 +268,7 @@
         form.addEventListener('submit', function(e){
             e.preventDefault()
 
-            var url = 'http://127.0.0.1:8000/Jobs/create-job'
+            var url = 'http://bjgost.pythonanywhere.com/Jobs/create-job'
             var title = document.getElementById('job-title').value
             var description = document.getElementById('job-desc').value 
             var due_date = document.getElementById('due-date').value 
