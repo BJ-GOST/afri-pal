@@ -1,1 +1,1 @@
-web gunicorn afripal.wsgi --log-file -
+web: gunicorn 'afripal.wsgi'
