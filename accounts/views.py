@@ -51,6 +51,13 @@ def login(request):
 
 
 
+def contact_page(request):
+    template_name = 'afripal/contacts.html'
+    return (request, template_name)
+
+
+
+
 @login_required(login_url='login')
 def client_page(request):
     template_name = 'afripal/clients.html'
