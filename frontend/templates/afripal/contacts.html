@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
+    {%load static%}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- unicons link -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/swiper-bundle.min.css' %}">
     <title>Afripal home page</title>
 </head>
 
@@ -16,19 +17,19 @@
     <header>
         <div class="nav-bar">
             <div class="logo">
-                <a href="index.html">Afri<span>pal</span></a>
+                <a href="{%url 'index' %}">Afri<span>pal</span></a>
             </div>
             <div class="navigation">
                 <div class="navigation-items">
                     <i class="uil uil-times nav-close-btn"></i>
-                    <a href="index.html"><i class="uil uil-home"></i>Home</a>
+                    <a href="{%url 'index' %}"><i class="uil uil-home"></i>Home</a>
                     <a href="about.html"> <i class="uil uil-info-circle"></i>About</a>
 
-                    <a href="contacts.html"> <i class="uil uil-envelope"></i>Contact us</a>
+                    <a href="{%url 'contacts' %}"> <i class="uil uil-envelope"></i>Contact us</a>
                 </div>
             </div>
             <div class="login-btn">
-                <a href="signin.html">Login</a>
+                <a href="{% url 'login' %}">Login</a>
             </div>
             <i class="uil uil-apps nav-menu-btn"></i>
         </div>
@@ -99,17 +100,17 @@
     <section class="footer">
 
         <div class="copyright">
-            <p> <i class="uil uil-copyright"></i>Copyright 2022, <a href="index.html">Afri<span>pal</span></a></p>
+            <p> <i class="uil uil-copyright"></i>Copyright 2022, <a href="{%url 'index' %}">Afri<span>pal</span></a></p>
         </div>
         <div class="footer-links">
-            <a href="index.html">Home</a>
+            <a href="{%url 'index' %}">Home</a>
             <a href="#">Terms of service</a>
             <a href="#">Privacy Policy</a>
-            <a href="signup.html">Sign Up</a>
+            <a href="{%url 'register' %}">Sign Up</a>
         </div>
     </section>
-    <script src="scripts/swiper-bundle.min.js"></script>
-    <script src="scripts/scripts.js"></script>
+    <script src="{% static 'scripts/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
 </body>
 
 </html>
