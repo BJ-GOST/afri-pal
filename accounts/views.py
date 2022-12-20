@@ -53,7 +53,7 @@ def login(request):
 
 def contact_page(request):
     template_name = 'afripal/contacts.html'
-    return (request, template_name)
+    return render(request, template_name)
 
 
 
