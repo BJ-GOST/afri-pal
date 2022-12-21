@@ -23,5 +23,5 @@ def mark(request):
             job.save()
         else:
             pass
-    template_name = 'afripal\success.html'
+    template_name = 'afripal/success.html'
     return render (request, template_name)
