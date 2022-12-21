@@ -8,7 +8,7 @@ def detail_view(request, pk):
     job = Job.objects.get(id=pk)
     print(job.title)
     context = {'job':job}
-    template_name = 'afripal\job_detail.html'
+    template_name = 'afripal/job_detail.html'
     return render (request, template_name, context)
 
 
