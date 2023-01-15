@@ -24,13 +24,7 @@ def create_checkout_session(request):
     job.payment = 'completed'
     job.save()
     
-    amount = amount//100
-    
-    Client = job.customer
-
-    #creating and saving the transaction to the database
-    transaction = Transaction(client=Client, job=job, amount=amount)
-    transaction.save()
+   
 
 
 
@@ -51,6 +45,15 @@ def create_checkout_session(request):
     success_url=YOUR_DOMAIN + '/success.html',
     cancel_url=YOUR_DOMAIN + '/cancel.html',
     )
+    
+    
+    amount = amount//100
+    Client = job.customer
+
+    #creating and saving the transaction to the database
+    transaction = Transaction(client=Client, job=job, amount=amount)
+    transaction.save()
+    
     return JsonResponse({'id': session.id})
 
 
