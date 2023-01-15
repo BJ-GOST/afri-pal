@@ -24,7 +24,7 @@ def create_checkout_session(request):
     job.payment = 'completed'
     job.save()
     
-    amount = amount/100
+    #amount = amount/100
     
     Client = job.customer
 
